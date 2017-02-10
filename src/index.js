@@ -1,30 +1,12 @@
-import { applyMiddleware, createStore } from 'redux';
-import logger from 'redux-logger';
+import React from 'react';
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 
-const reducer = (initialState=0, action) => {
-  switch( action.type )
-  {
-    case  'INC':
-      return initialState + 1;
+import Layout from './components/Layout'
+import store from './store'
 
-    case  'DEC':
-      return initialState - 1;
+const app = document.getElementById('root');
 
-    default:
-    break;
-  }
-
-  return initialState;
-}
-
-const middleware = applyMiddleware( logger() );
-
-const store = createStore( reducer, 1, middleware );
-
-store.dispatch( { type: 'INC'} );
-store.dispatch( { type: 'INC'} );
-store.dispatch( { type: 'INC'} );
-store.dispatch( { type: 'DEC'} );
-store.dispatch( { type: 'DEC'} );
-store.dispatch( { type: 'DEC'} );
-
+ReactDOM.render( <Provider store={store}>
+    <Layout />
+</Provider>, app);
